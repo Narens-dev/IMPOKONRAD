@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { bodegasAPI } from '../services/api';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'https://impokonrad.onrender.com';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
   Authorization: `Bearer ${localStorage.getItem('access_token')}`,

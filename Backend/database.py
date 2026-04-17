@@ -8,7 +8,10 @@ load_dotenv()
 # Usamos la variable de entorno, y si no existe (por seguridad) ponemos la local
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg://impokonrad:impokonrad123@localhost:5433/impokonrad")
 # Creamos el motor de la base de datos
-engine = create_engine(DATABASE_URL)
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"prepare_threshold": None}
+)
 
 # Creamos la sesión para poder hacer consultas después
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
