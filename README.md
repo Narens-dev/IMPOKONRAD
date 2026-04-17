@@ -1,74 +1,102 @@
-# 🚢 IMPOKONRAD - Plataforma Logística y de Rastreo
+# IMPOKONRAD - Sistema de Gestión Logística
 
-**IMPOKONRAD** es una plataforma logística de vanguardia (MVP) diseñada para la gestión de contenedores, bodegas, y manifiestos de carga. Este proyecto fue desarrollado con un enfoque centrado en la **Inteligencia Artificial**, utilizando agentes de IA para la automatización de procesos contables (lectura y procesamiento de facturas) y simulaciones de rastreo geolocalizado en tiempo real.
+IMPOKONRAD es el producto mínimo viable (MVP) de un sistema de gestión para contenedores, aduanas y manifiestos de carga. Este proyecto nace con la intención de modernizar la cadena de suministro a través de la integración de tareas contables automatizadas y monitoreo geoespacial constante.
 
-> [!NOTE]
-> **🤖 Desarrollo Asistido por Inteligencia Artificial**
-> Este proyecto fue conceptualizado, programado y estructurado en su gran mayoría mediante la colaboración directa con IA Avanzada (Gemini). Esto es parte integral del proyecto, demostrando las capacidades actuales de la ingeniería de software asistida para diseñar arquitecturas escalables (Cliente-Servidor) y construir MVPs funcionales en tiempos récord de manera altamente eficiente.
+**Nota sobre el desarrollo asistido:** 
+El diseño de la arquitectura, planeación de base de datos y la codificación general de este MVP fueron asistidos de manera intensiva por modelos de IA (principalmente Gemini y Claude). 
 
-## 🚀 Tecnologías Utilizadas
+## Arquitectura y Tecnologías
 
-### Backend
-- **FastAPI (Python):** Framework principal de alto rendimiento para la construcción de la API REST.
-- **PostgreSQL & SQLAlchemy:** Base de datos relacional y ORM para el manejo de la persistencia de datos y relaciones (Usuarios, Contenedores, Bodegas, Facturas). Autenticación segura mediante JWT y contraseñas hasheadas (Bcrypt).
-- **Google Gemini (Vision API):** Agente de Inteligencia Artificial (`ai_agent.py`) entrenado para recibir facturas en formato de imagen, extraer la información clave (proveedor, montos, fechas) de manera autónoma y preprocesar los datos para la base de datos.
-- **WebSockets:** Implementados nativamente en el backend para transmitir las coordenadas geográficas en tiempo real desde los navíos al frontend sin recargar la página.
+El proyecto divide sus responsabilidades en dos aplicaciones mediante una arquitectura Cliente-Servidor:
+
+### Backend 
+- **Python y FastAPI**: Actúa como el punto de entrada de la API REST. Fue elegido por su velocidad y manejo nativo de programación asincrónica para tareas de IA y WebSockets.
+- **PostgreSQL**: Base de datos principal operada mediante el ORM SQLAlchemy con migraciones de Alembic.
+- **Google Gemini (Vision)**: Se desarrolló un script de lado del servidor para procesar imágenes de facturas subidas por los usuarios, extrayendo la información bruta (proveedor y montos) para parsearse a la tabla de reportes financieros automáticamente.
+- **WebSockets**: Se estableció una conexión TCP persistente para transferir la latitud y longitud calculada en un simulador de tráfico de barcos hacia el frontend y actualizar las vistas.
 
 ### Frontend
-- **React 19 & Vite:** Arquitectura de cliente para una experiencia de usuario rápida y fluida (SPA - Single Page Application).
-- **Tailwind CSS v4:** Motor de estilos utilitarios garantizando diseños limpios, estéticos, y responsivos.
-- **Google Maps API:** Integración de componentes geográficos interactivos para renderizar y seguir los contenedores en tránsito directo desde el panel de control.
+- **React y Vite**: Creación de una SPA (Single Page Application) estructurada y modular.
+- **Tailwind CSS**: Framework que permitió estilizar un esquema UI de paneles analíticos.
+- **Google Maps JS API**: El visualizador del mapa mundial sobre el que se despliegan los indicadores de estatus de ruta de la mercancía.
 
-## ⚙️ Cómo Ejecutar el Proyecto (Desarrollo Local)
+---
 
-Sigue estos pasos para levantar el entorno de desarrollo en tu propia máquina.
+## Cómo ejecutar el proyecto en modo desarrollo
 
-### 1. Base de Datos (PostgreSQL)
-Recomendamos usar Docker para levantar la base de datos rápidamente:
+Para levantar este proyecto de manera local, considera la creación de entornos separados.
+
+### 1. Variables de entorno necesarias
+Para evitar excepciones, requieres registrarte en las siguientes plataformas y guardar las llaves generadas de la API:
+- Google Maps JavaScript API
+- Google AI Studio (Gemini)
+
+### 2. Base de datos
+Una forma ágil para no saturar tu instalación de sistema con configuraciones de la base de datos es inicializar el contenedor Docker provisto (si dispones de Docker).
 ```bash
 docker-compose up -d
 ```
-*(Alternativa: Puedes crear tu base de datos en Supabase/Neon y agregar la URL de conexión en tu `.env`).*
+*(Alternativa: Conectar la aplicación mediante una cadena de conexión remota apuntando a un servicio de bases de datos como Neon o Supabase).*
 
-### 2. Backend (FastAPI)
+### 3. Configuración del Servidor Backend
+Abre una terminal y colócate en el directorio `/Backend`.
+
 ```bash
-cd Backend
-
-# 1. Crear el entorno virtual e instalar dependencias
+# Crear y activar la máquina virtual de Python
 python -m venv venv
-# Activar entorno:
-# En Windows: .\venv\Scripts\activate
-# En Mac/Linux: source venv/bin/activate
+.\venv\Scripts\activate  # En sistemas operativos Windows.
+
+# Descargar las librerías necesarias de Python
 pip install -r requirements.txt
 
-# 2. Configurar variables de entorno
-# Crea un archivo .env en la carpeta Backend con tus claves de JWT, la URL de Base de datos, y tu GEMINI_API_KEY.
+# Inicializar un archivo .env dentro de la carpeta /Backend
+DATABASE_URL=postgresql+psycopg://usuario:password@localhost:5433/impokonrad
+SECRET_KEY=tu_clave_secreta_super_segura
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+REFRESH_TOKEN_EXPIRE_DAYS=7
+GEMINI_API_KEY=tu_api_key_de_gemini_aqui
 
-# 3. Levantar el servidor de la API
+# Iniciar la interfaz ASGI
 uvicorn main:app --reload
 ```
-La API estará disponible en `http://localhost:8000`. Puedes consultar la documentación interactiva en `http://localhost:8000/docs`.
 
-### 3. Frontend (React)
-Abre una nueva ventana de terminal:
+### 4. Configurar el Frontend
+Abre una terminal paralela y posiciónate sobre el directorio `/frontend-react`.
+
 ```bash
-cd frontend-react
-
-# 1. Instalar las dependencias de Node
+# Descarga de dependencias
 npm install
 
-# 2. Configurar variables de entorno
-# Crea un archivo .env en la carpeta frontend-react y añade tu VITE_GOOGLE_MAPS_API_KEY y demás configuraciones necesarias.
+# Creación de archivo .env dentro de la carpeta frontend-react
+VITE_GOOGLE_MAPS_API_KEY=tu_api_key_de_google_maps_aqui
+VITE_GEMINI_API_KEY=tu_api_key_de_gemini_aqui
 
-# 3. Levantar la aplicación web
+# Levantar el entorno local de desarrollo web
 npm run dev
 ```
-La aplicación web correrá por defecto en `http://localhost:5173`.
 
-### 4. Simulador de Rastreo (Tiempo Real)
-Para ver el funcionamiento estelar del mapa (contenedores moviéndose en tiempo real), debes inicializar el simulador de rutas de los navíos. En una nueva terminal con el entorno virtual activado:
+### 5. Script simulador de flota
+Para comprobar el correcto funcionamiento de los rastreos de ruta, el puerto WebSockets en base a coordenadas debe ser alimentado artificialmente activando la simulación:
 ```bash
-cd Backend
 python route_simulator.py
 ```
-Este script empezará a emitir coordenadas hacia el backend de manera constante, las cuales se propagarán por WebSocket hacia tu sesión de React, logrando un auténtico radar logístico en vivo.
+*(Recuerda activar el entorno virtual previamente).*
+
+---
+
+## Capturas del Sistema
+
+A continuación se muestra el esquema visual y funcionalidad de los diferentes módulos del tablero que compone a IMPOKONRAD.
+
+**Panel de Control (Centro de métricas globales)**
+![Vista general del Dashboard](./assets/dashboard.png)
+
+**Auditoría y Lector Extractor operado por IA**
+![Auditoría de imágenes por IA Contable](./assets/ia-contable.png)
+
+**Centro de Mapeo y Tracking Satelital Dinámico**
+![Monitoreo Satelital de contenedores](./assets/rastreo-mapa.png)
+
+**Inventario general de infraestructura (Bodegas y sedes)**
+![Catálogo y saturación de bodegas operativas](./assets/bodegas.png)
