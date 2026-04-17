@@ -89,14 +89,41 @@ python route_simulator.py
 
 A continuación se muestra el esquema visual y funcionalidad de los diferentes módulos del tablero que compone a IMPOKONRAD.
 
+**Loging**
+<img width="1919" height="1032" alt="image" src="https://github.com/user-attachments/assets/1f6f6067-1dc8-49ce-8660-40d50a62db70" />
+
+
 **Panel de Control (Centro de métricas globales)**
-![Vista general del Dashboard](./assets/dashboard.png)
+<img width="1917" height="1028" alt="image" src="https://github.com/user-attachments/assets/46525918-3be9-45f2-b9bd-dc0d5a4a9d73" />
+
 
 **Auditoría y Lector Extractor operado por IA**
-![Auditoría de imágenes por IA Contable](./assets/ia-contable.png)
+<img width="1919" height="1032" alt="image" src="https://github.com/user-attachments/assets/f09ab30c-df38-4a32-b8d4-97e5f45a6e68" />
 
 **Centro de Mapeo y Tracking Satelital Dinámico**
-![Monitoreo Satelital de contenedores](./assets/rastreo-mapa.png)
+<img width="1916" height="1013" alt="image" src="https://github.com/user-attachments/assets/747eeab5-a372-46b4-8622-77d27b5c2367" />
 
-**Inventario general de infraestructura (Bodegas y sedes)**
-![Catálogo y saturación de bodegas operativas](./assets/bodegas.png)
+
+**Inventario general de Contenedores**
+<img width="1919" height="1029" alt="image" src="https://github.com/user-attachments/assets/4f4957e0-ea76-412e-b829-dc42dfc56b1c" />
+
+**Inventario general de Bodegas**
+<img width="1914" height="1035" alt="image" src="https://github.com/user-attachments/assets/52f550ce-54d0-412c-a869-ca5e92453b2e" />
+
+
+**Facturacion**
+<img width="1918" height="1039" alt="image" src="https://github.com/user-attachments/assets/ef914da3-6437-48cb-af78-8634fc981c86" />
+
+**Manifiestos**
+<img width="1919" height="1028" alt="image" src="https://github.com/user-attachments/assets/9175ec82-be50-4e0d-b43f-43644e07a458" />
+
+## Landing Page
+<img width="1916" height="1032" alt="image" src="https://github.com/user-attachments/assets/51875e35-12dd-49e4-9a62-ec9361b30ff0" />
+
+<img width="1919" height="1021" alt="image" src="https://github.com/user-attachments/assets/48749e53-50e3-40e5-9883-1790198bb8e0" />
+
+<img width="1919" height="1035" alt="image" src="https://github.com/user-attachments/assets/159faa67-7804-4807-adfe-7e1e47bb7f2b" />
+
+
+
+
