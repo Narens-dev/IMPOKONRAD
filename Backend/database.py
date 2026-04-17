@@ -1,9 +1,12 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from dotenv import load_dotenv
 
-# Usamos exactamente la URL que ya te funcionó
-DATABASE_URL = "postgresql+psycopg://impokonrad:impokonrad123@localhost:5433/impokonrad"
+load_dotenv()
 
+# Usamos la variable de entorno, y si no existe (por seguridad) ponemos la local
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg://impokonrad:impokonrad123@localhost:5433/impokonrad")
 # Creamos el motor de la base de datos
 engine = create_engine(DATABASE_URL)
 
