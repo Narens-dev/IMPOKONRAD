@@ -1,0 +1,24 @@
+# Archivos de entorno en cualquier carpeta
+**/.env
+**/.env.*
+*.local
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/venv/
+**/.pytest_cache/
+
+# Node
+**/node_modules/
+**/dist/
+**/dist-ssr/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editores
+**/.vscode/
+**/.idea/
+**/.DS_Store

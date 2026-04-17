@@ -1,0 +1,11 @@
+{
+  "venvPath": "d:/Ingenieria de software 2/IMPOKONRAD/Backend",
+  "venv": "venv",
+  "pythonPath": "d:/Ingenieria de software 2/IMPOKONRAD/Backend/venv/Scripts/python.exe",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "pythonPath": "d:/Ingenieria de software 2/IMPOKONRAD/Backend/venv/Scripts/python.exe"
+    }
+  ]
+}
